@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping(value = "/rents")
 public class RentController {
 
-    final RentService rentService;
+    private final RentService rentService;
 
     public RentController(RentService rentService) {
         this.rentService = rentService;
@@ -21,7 +21,6 @@ public class RentController {
 
     @GetMapping(value = "/animal/{animal}")
     public List<Rent> getFlights(@PathVariable String animal) {
-        List<Rent> rents = rentService.getRentsByAnimal(animal);
-        return rents;
+        return rentService.getRentsByAnimal(animal);
     }
 }
