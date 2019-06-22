@@ -23,7 +23,7 @@ public class CurrencyConverter {
 	@Column(name="currencyto")
 	private String currencyTo;
 
-	@Column(name="conversionrate")
+	@Column(name="conversionrate", precision=5, scale=3) // Количество цифр после разделителя (scale) не должно быть больше общего количества цифр (precision)
 	private BigDecimal conversionRate;
 
 }
