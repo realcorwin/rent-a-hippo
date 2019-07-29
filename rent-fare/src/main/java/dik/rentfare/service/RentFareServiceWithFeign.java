@@ -10,6 +10,7 @@ import dik.rentfare.repository.RentFareRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -20,10 +21,26 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public interface RentFareService {
+@ConditionalOnProperty(name="use", havingValue="feign")
+public class RentFareServiceWithFeign implements RentFareService {
 
-    public RentFare getRentFareByAnimal(String animal);
+    @Autowired
+    private RentFareRepository rentFareRepository;
 
-    public BigDecimal getConversion(String toCurrency);
+    @Autowired
+    private CurrencyConversionServiceProxy feignProxy;
 
+    @Value("${base.currency:RUB}")
+    private String baseCurrency;
+
+    public RentFare getRentFareByAnimal(String animal) {
+        return rentFareRepository.findFirstByAnimal(animal);
+    }
+
+    public BigDecimal getConversion(String toCurrency) {
+
+            CurrencyConversionVO converter = feignProxy.convertCurrency(baseCurrency, toCurrency);
+            return converter.getConversionRate();
+
+    }
 }
