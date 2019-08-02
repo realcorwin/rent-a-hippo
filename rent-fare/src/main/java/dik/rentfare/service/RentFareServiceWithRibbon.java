@@ -22,7 +22,7 @@ public class RentFareServiceWithRibbon implements RentFareService {
     private RentFareRepository rentFareRepository;
 
     @Autowired
-    RestTemplate restTemplate;
+    private RestTemplate restTemplate;
 
     @Value("${base.currency:RUB}")
     private String baseCurrency;
