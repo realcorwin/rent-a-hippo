@@ -1,2 +1,9 @@
 # Default ignored files
 /workspace.xml
+/libraries/
+/compiler.xml
+/encodings.xml
+/misc.xml
+/modules.xml
+/rent-a-hippo.iml
+/vcs.xml
