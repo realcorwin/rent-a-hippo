@@ -40,7 +40,7 @@ public class RentFareServiceWithFeign implements RentFareService {
             @HystrixProperty(name="execution.isolation.thread.timeoutInMilliseconds", value="7000")
     })
     public RentFare getRentFareByAnimal(String animal) {
-        sleepRandomly();
+        //sleepRandomly();
         return rentFareRepository.findFirstByAnimal(animal);
     }
 
