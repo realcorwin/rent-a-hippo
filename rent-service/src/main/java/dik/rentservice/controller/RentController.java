@@ -20,7 +20,7 @@ public class RentController {
     }
 
     @GetMapping(value = "/animal/{animal}")
-    public List<Rent> getFlights(@PathVariable String animal) {
+    public List<Rent> getRents(@PathVariable String animal) {
         return rentService.getRentsByAnimal(animal);
     }
 }
